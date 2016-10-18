@@ -1,0 +1,19 @@
+{
+  "name": "karma-spec-as-html-reporter",
+  "version": "1.0.0",
+  "description": "A Karma reporter that creates an html file displaying results similar to the output of the karma-spec-reporter",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "chokidar 'src/*.js' 'index.js' -p -c 'jasmine' "
+  },
+  "keywords": [
+    "karma-plugin",
+    "karma-reporter"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chokidar-cli": "^1.2.0",
+    "jasmine": "^2.5.2"
+  }
+}
