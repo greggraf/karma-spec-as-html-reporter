@@ -6,14 +6,14 @@ var path = require('path')
 
 var SpecAsHTMLReporter = function( baseReporterDecorator, formatError, config ) {
 
-	baseReporterDecorator(this);
+	baseReporterDecorator( this );
 
 	var reporterConfig = config.specAsHtmlReporter || {};
 	var self = this;
 
 	self.suites = {};
 
-	var Suite = function( description ) {
+	var Suite = function( description, preMarkup, postMarkup ) {
 
 		var items = [];
 
@@ -33,10 +33,17 @@ var SpecAsHTMLReporter = function( baseReporterDecorator, formatError, config ) 
 				margin = margin || "";
 				var indent = margin + "  ";
 
-				var output = [
+				preMarkup = preMarkup || [
 					margin + '<li class="suite">' + description,
 					indent + '<ul>'
 				];
+
+				postMarkup = postMarkup || [
+					indent + '</ul>',
+					margin + '</li>'
+				];
+
+				var output = preMarkup;
 
 
 				items.forEach( function( item ) {
@@ -52,10 +59,7 @@ var SpecAsHTMLReporter = function( baseReporterDecorator, formatError, config ) 
 					}
 				});
 
-				output = output.concat( [
-					indent + '</ul>',
-					margin + '</li>'
-				] );
+				output = output.concat( postMarkup );
 
 				return output;
 			}
@@ -64,7 +68,7 @@ var SpecAsHTMLReporter = function( baseReporterDecorator, formatError, config ) 
 		return suite;
 	};
 
-	var baseSuite = Suite( "base" );
+	var baseSuite = Suite( 'base', [ '<h1>Spec</h1><div class="suite">', '<ul>' ], [ '</ul>', '</div>' ] );
 
 	var checkSuites = function( suiteLabels ) {
 

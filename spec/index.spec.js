@@ -99,15 +99,15 @@ describe( "karma-spec-as-html-reporter", function() {
 		);
 
 		var expectedResult = [
-			'<li class="suite">base',
-			'  <ul>',
+			'<h1>Spec</h1><div class="suite">',
+			'<ul>',
 			'    <li class="suite">Suite1',
 			'      <ul>',
 			'        <li class="success">should do the first thing</li>',
 			'      </ul>',
 			'    </li>',
-			'  </ul>',
-			'</li>',
+			'</ul>',
+			'</div>',
 			''
 		].join( '\n' );
 
@@ -128,16 +128,15 @@ describe( "karma-spec-as-html-reporter", function() {
 		);
 
 		var expectedResult = [
-			'<li class="suite">base',
-			'  <ul>',
+			'<h1>Spec</h1><div class="suite">',
+			'<ul>',
 			'    <li class="suite">constructor',
 			'      <ul>',
 			'        <li class="success">should do the first thing</li>',
 			'      </ul>',
 			'    </li>',
-			'  </ul>',
-			'</li>',
-			''
+			'</ul>',
+			'</div>',			''
 		].join( '\n' );
 
 		var result = reporter.getResultsMarkup()
@@ -156,16 +155,15 @@ describe( "karma-spec-as-html-reporter", function() {
 		);
 
 		var expectedResult = [
-			'<li class="suite">base',
-			'  <ul>',
+			'<h1>Spec</h1><div class="suite">',
+			'<ul>',
 			'    <li class="suite">suite1',
 			'      <ul>',
 			'        ',
 			'      </ul>',
 			'    </li>',
-			'  </ul>',
-			'</li>',
-			''
+			'</ul>',
+			'</div>',			''
 		].join( '\n' );
 
 		var result = reporter.getResultsMarkup()
@@ -183,16 +181,15 @@ describe( "karma-spec-as-html-reporter", function() {
 		);
 
 		var expectedResult = [
-			'<li class="suite">base',
-			'  <ul>',
+			'<h1>Spec</h1><div class="suite">',
+			'<ul>',
 			'    <li class="suite">suite1',
 			'      <ul>',
 			'        <li class="failure">should do the first thing</li>',
 			'      </ul>',
 			'    </li>',
-			'  </ul>',
-			'</li>',
-			''
+			'</ul>',
+			'</div>',			''
 		].join( '\n' );
 
 		var result = reporter.getResultsMarkup()
@@ -218,8 +215,8 @@ describe( "karma-spec-as-html-reporter", function() {
 		);
 
 		var expectedResult = [
-			'<li class="suite">base',
-			'  <ul>',
+			'<h1>Spec</h1><div class="suite">',
+			'<ul>',
 			'    <li class="suite">suite1',
 			'      <ul>',
 			'        <li class="success">should do the first thing</li>',
@@ -230,9 +227,8 @@ describe( "karma-spec-as-html-reporter", function() {
 			'        <li class="success">should do the second thing</li>',
 			'      </ul>',
 			'    </li>',
-			'  </ul>',
-			'</li>',
-			''
+			'</ul>',
+			'</div>',			''
 		].join( '\n' );
 
 		var result = reporter.getResultsMarkup()
@@ -274,8 +270,8 @@ describe( "karma-spec-as-html-reporter", function() {
 
 
 		var expectedResult = [
-			'<li class="suite">base',
-			'  <ul>',
+			'<h1>Spec</h1><div class="suite">',
+			'<ul>',
 			'    <li class="suite">suite1',
 			'      <ul>',
 			'        <li class="success">should do the first thing</li>',
@@ -293,8 +289,8 @@ describe( "karma-spec-as-html-reporter", function() {
 			'        <li class="success">should do the fifth thing</li>',
 			'      </ul>',
 			'    </li>',
-			'  </ul>',
-			'</li>',
+			'</ul>',
+			'</div>',
 			''
 		].join( '\n' );
 
@@ -333,8 +329,8 @@ describe( "karma-spec-as-html-reporter", function() {
 
 
 		var expectedResult = [
-			'<li class="suite">base',
-			'  <ul>',
+			'<h1>Spec</h1><div class="suite">',
+			'<ul>',
 			'    <li class="suite">suite1',
 			'      <ul>',
 			'        <li class="success">should do the first thing</li>',
@@ -359,8 +355,8 @@ describe( "karma-spec-as-html-reporter", function() {
 			'        <li class="success">should do the fifth thing</li>',
 			'      </ul>',
 			'    </li>',
-			'  </ul>',
-			'</li>',
+			'</ul>',
+			'</div>',
 			''
 		].join( '\n' );
 
