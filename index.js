@@ -60,6 +60,7 @@ var SpecAsHTMLReporter = function( baseReporterDecorator, formatError, config ) 
 				return output;
 			}
 		};
+
 		return suite;
 	};
 
@@ -71,17 +72,23 @@ var SpecAsHTMLReporter = function( baseReporterDecorator, formatError, config ) 
 
 		if ( suiteLabels.forEach ) {
 
-			var last = suiteLabels.length - 1;
 			var parentSuite = baseSuite;
+			var labelHierarchy = "";
 
 			suiteLabels.forEach( function( label ) {
 
-				var suite = suites[ label ];
+				labelHierarchy += ":" + label;
 
-				if ( !suite ) {
+				var suite;
+
+				if( suites.hasOwnProperty( labelHierarchy ) ) {
+
+					suite = suites[ labelHierarchy ];
+
+				} else {
 
 					suite = Suite( label );
-					suites[ label ] = suite;
+					suites[ labelHierarchy ] = suite;
 					parentSuite.add( suite );
 
 				}
@@ -90,7 +97,7 @@ var SpecAsHTMLReporter = function( baseReporterDecorator, formatError, config ) 
 
 			});
 
-			return suites[ suiteLabels[ last ] ]
+			return suites[ labelHierarchy ]
 
 		}
 
@@ -112,7 +119,7 @@ var SpecAsHTMLReporter = function( baseReporterDecorator, formatError, config ) 
 	};
 
 	var add = function( result, status) {
-
+	//console.log(result)
 		if ( result && result.suite ) {
 			var activeSuite = checkSuites( result.suite )
 			activeSuite.add( result, status );

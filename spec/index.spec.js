@@ -94,14 +94,14 @@ describe( "karma-spec-as-html-reporter", function() {
 			{},
 			{
 				'description': "should do the first thing",
-				'suite': [ "suite1" ]
+				'suite': [ "Suite1" ]
 			}
 		);
 
 		var expectedResult = [
 			'<li class="suite">base',
 			'  <ul>',
-			'    <li class="suite">suite1',
+			'    <li class="suite">Suite1',
 			'      <ul>',
 			'        <li class="success">should do the first thing</li>',
 			'      </ul>',
@@ -117,6 +117,34 @@ describe( "karma-spec-as-html-reporter", function() {
 
 	} );
 
+	it( "should properly render a suite that has name of inherited object property", function() {
+
+		reporter.specSuccess(
+			{},
+			{
+				'description': "should do the first thing",
+				'suite': [ "constructor" ]
+			}
+		);
+
+		var expectedResult = [
+			'<li class="suite">base',
+			'  <ul>',
+			'    <li class="suite">constructor',
+			'      <ul>',
+			'        <li class="success">should do the first thing</li>',
+			'      </ul>',
+			'    </li>',
+			'  </ul>',
+			'</li>',
+			''
+		].join( '\n' );
+
+		var result = reporter.getResultsMarkup()
+		expect( result ).toBe( expectedResult );
+		expect( result ).toMatch( /<li class="success">/ );
+
+	} );
 
 	it( "should not render a suite with a single successful result lacking description ", function() {
 
@@ -258,6 +286,72 @@ describe( "karma-spec-as-html-reporter", function() {
 			'            <li class="suite">suite3',
 			'              <ul>',
 			'                <li class="success">should do the fourth thing</li>',
+			'              </ul>',
+			'            </li>',
+			'          </ul>',
+			'        </li>',
+			'        <li class="success">should do the fifth thing</li>',
+			'      </ul>',
+			'    </li>',
+			'  </ul>',
+			'</li>',
+			''
+		].join( '\n' );
+
+		var result = reporter.getResultsMarkup()
+
+		expect( result ).toBe( expectedResult );
+
+
+	} );
+
+	it( "should properly render a suite with nested suites, duplicated names in hierarchy ", function() {
+
+		var sampleResults = [
+			{
+				'description': "should do the first thing",
+				'suite': [ "suite1" ]
+			},
+			{
+				'description': "should do the second thing",
+				'suite': [ "suite1", "suite2", "suiteSame" ]
+			},
+			{
+				'description': "should do the third thing",
+				'suite': [ "suite1", "suite3", "suiteSame" ]
+			},
+			{
+				'description': "should do the fifth thing",
+				'suite': [ "suite1" ]
+			}
+		];
+
+		reporter.specSuccess( {}, sampleResults[0] );
+		reporter.specFailure( {}, sampleResults[1] );
+		reporter.specSuccess( {}, sampleResults[2] );
+		reporter.specSuccess( {}, sampleResults[3] );
+
+
+		var expectedResult = [
+			'<li class="suite">base',
+			'  <ul>',
+			'    <li class="suite">suite1',
+			'      <ul>',
+			'        <li class="success">should do the first thing</li>',
+			'        <li class="suite">suite2',
+			'          <ul>',
+			'            <li class="suite">suiteSame',
+			'              <ul>',
+			'                <li class="failure">should do the second thing</li>',
+			'              </ul>',
+			'            </li>',
+			'          </ul>',
+			'        </li>',
+			'        <li class="suite">suite3',
+			'          <ul>',
+			'            <li class="suite">suiteSame',
+			'              <ul>',
+			'                <li class="success">should do the third thing</li>',
 			'              </ul>',
 			'            </li>',
 			'          </ul>',
