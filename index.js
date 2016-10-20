@@ -2,10 +2,13 @@ var fs = require( "fs" );
 var os = require('os')
 var path = require('path')
 
+
+
 var SpecAsHTMLReporter = function( baseReporterDecorator, formatError, config ) {
 
 	baseReporterDecorator(this);
 
+	var reporterConfig = config.specAsHtmlReporter || {};
 	var self = this;
 
 	self.suites = {};
@@ -172,11 +175,19 @@ var SpecAsHTMLReporter = function( baseReporterDecorator, formatError, config ) 
 
     this.onRunComplete = function( ) {
 
-    	console.log("config.basePath", config.basePath + "/spec.html", self.render() )
+		var fullPath = path.resolve(
+			reporterConfig.dir || config.basePath || ".",
+			reporterConfig.outputFile || "spec.html"
+		);
 
-		fs.writeFile( config.basePath + "/spec.html", self.render(), function( err) {
-			console.log(err)
-		} );
+		fs.writeFile(
+			fullPath,
+			self.render(),
+			function( err) {
+				console.log(err)
+			}
+		);
+
 	};
 
 

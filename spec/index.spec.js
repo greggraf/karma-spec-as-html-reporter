@@ -50,8 +50,7 @@ describe( "karma-spec-as-html-reporter", function() {
 
 	beforeEach( function() {
 
-		reporter = new SpecAsHTMLReporter[1]( baseReporterDecorator, {}, { basePath: "/project/"} );
-		spyOn(fs, "writeFile")
+		reporter = new SpecAsHTMLReporter[1]( baseReporterDecorator, {}, {} );
 
 	} );
 
@@ -285,7 +284,7 @@ describe( "karma-spec-as-html-reporter", function() {
 			spyOn( reporter, "getStyles");
 			spyOn( reporter, "getResultsMarkup");
 
-			var expectedResult = [
+			var baseMarkup = [
 				'<!DOCTYPE html>',
 				'<html lang="en">',
 				'<head>',
@@ -304,7 +303,7 @@ describe( "karma-spec-as-html-reporter", function() {
 			].join( '\n' );
 
 			var result = reporter.render()
-			expect( result ).toBe( expectedResult );
+			expect( result ).toBe( baseMarkup );
 
 		} );
 
@@ -312,10 +311,39 @@ describe( "karma-spec-as-html-reporter", function() {
 
 	describe( "saving to file", function() {
 
-		it( "should call writeFile ", function() {
+		describe( "'dir' and 'outputFile' are not specified in cofiguration", function() {
 
-			reporter.onRunComplete();
-			expect( fs.writeFile ).toHaveBeenCalledWith(  );
+			it( "should write to default file location config.basePath/spec.html ", function() {
+
+				reporter = new SpecAsHTMLReporter[1]( baseReporterDecorator, {}, { basePath: "/project" } );
+				spyOn(fs, "writeFile")
+
+				reporter.onRunComplete();
+				expect( fs.writeFile.calls.argsFor(0)[0] ).toBe( '/project/spec.html' );
+
+			} );
+
+		} );
+
+		describe( "'dir' and 'outputFile' are  specified in cofiguration", function() {
+
+			it( "should write to default file location config.basePath/spec.html ", function() {
+
+				var config = {
+					basePath: "/project",
+					specAsHtmlReporter: {
+						outputFile: "foo",
+						dir: "/foo"
+					}
+				}
+
+				reporter = new SpecAsHTMLReporter[1]( baseReporterDecorator, {}, config );
+				spyOn(fs, "writeFile")
+
+				reporter.onRunComplete();
+				expect( fs.writeFile.calls.argsFor(0)[0] ).toBe( '/foo/foo' );
+
+			} );
 
 		} );
 
