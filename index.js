@@ -1,7 +1,5 @@
 var fs = require( "fs" );
-var os = require('os')
 var path = require('path')
-
 
 
 var SpecAsHTMLReporter = function( baseReporterDecorator, formatError, config ) {

@@ -1,16 +1,21 @@
 {
   "name": "karma-spec-as-html-reporter",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A Karma reporter that creates an html file displaying results similar to the output of the karma-spec-reporter",
   "main": "src/index.js",
   "scripts": {
-    "test": "chokidar 'spec/*.js' 'index.js' -p -c 'jasmine' "
+    "test": "jasmine",
+    "test:watch": "chokidar 'spec/*.js' 'index.js' -p -c 'npm run test'"
+  },
+"repository": {
+    "type": "git",
+    "url": "git://github.com/greggraf/karma-spec-as-html-reporter"
   },
   "keywords": [
     "karma-plugin",
     "karma-reporter"
   ],
-  "author": "",
+  "author": "Greg Graf <work@greggraf.com>",
   "license": "ISC",
   "devDependencies": {
     "chokidar-cli": "^1.2.0",
