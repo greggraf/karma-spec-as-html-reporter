@@ -132,18 +132,18 @@ var SpecAsHTMLReporter = function( baseReporterDecorator, formatError, config ) 
 	this.getStyles = function () {
 
 		var output = [
-			'body {',
+			'.karma-spec-as-html {',
 			'  font-family: Helvetica, Arial, sans-serif;',
 			'  font-size: .9em;',
 			'  line-height: 1.5;',
 			'}',
-			'.suite ul {list-style-type: none; margin-top: .4em }',
-			'.suite li { margin-bottom: .8em; }',
-			'.suite { margin-top: 1em }',
-			'.success {color: green }',
-			'.success:before { content: "✓ " }',
-			'.failure {color: red }',
-			'.failure:before { content: "✗ " }'
+			'.karma-spec-as-html .suite ul {list-style-type: none; margin-top: .4em }',
+			'.karma-spec-as-html .suite li { margin-bottom: .8em; }',
+			'.karma-spec-as-html .suite { margin-top: 1em }',
+			'.karma-spec-as-html .success {color: green }',
+			'.karma-spec-as-html .success:before { content: "✓ " }',
+			'.karma-spec-as-html .failure {color: red }',
+			'.karma-spec-as-html .failure:before { content: "✗ " }'
 		]
 		return output.join("\n");
 	}
@@ -166,7 +166,9 @@ var SpecAsHTMLReporter = function( baseReporterDecorator, formatError, config ) 
 			'  </style>',
 			'</head>',
 			'<body>',
+			'  <div class="karma-spec-as-html">',
 			self.getResultsMarkup(),
+			'  </div>',
 			'</body>',
 			'</html>'
 		]
