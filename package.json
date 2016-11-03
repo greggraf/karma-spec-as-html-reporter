@@ -20,5 +20,8 @@
   "devDependencies": {
     "chokidar-cli": "^1.2.0",
     "jasmine": "^2.5.2"
+  },
+  "dependencies": {
+    "mkdirp": "^0.5.1"
   }
 }
