@@ -71,7 +71,6 @@ Use the `specAsHtmlReporter` configuration in your `karma.conf.js` file
 
 ## To Do
 
-- create the directory if it is not there
 - expose ways to inject CSS to change format of the results
 - see if it can be rewritten as an adapter like they do for real
   - take advantage of util.format() ?

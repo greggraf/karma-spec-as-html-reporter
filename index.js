@@ -1,5 +1,6 @@
 var fs = require( "fs" );
-var path = require('path')
+var path = require('path');
+var mkdirp = require('mkdirp');
 
 
 var SpecAsHTMLReporter = function( baseReporterDecorator, formatError, config ) {
@@ -199,6 +200,9 @@ var SpecAsHTMLReporter = function( baseReporterDecorator, formatError, config ) 
 			reporterConfig.dir || config.basePath || ".",
 			reporterConfig.outputFile || "spec.html"
 		);
+console.log("**************************************************", fullPath, path.dirname( fullPath ))
+		mkdirp.sync( path.dirname( fullPath ) );
+console.log("**************************************************", fs.statSync(path.dirname( fullPath )))
 
 		fs.writeFile(
 			fullPath,
