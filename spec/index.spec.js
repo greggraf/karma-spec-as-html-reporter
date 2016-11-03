@@ -388,6 +388,7 @@ describe( "karma-spec-as-html-reporter", function() {
 				'<body>',
 				'  <div class="karma-spec-as-html">',
 				'',
+				'',
 				'  </div>',
 				'</body>',
 				'</html>',

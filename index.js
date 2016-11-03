@@ -8,6 +8,7 @@ var SpecAsHTMLReporter = function( baseReporterDecorator, formatError, config ) 
 
 	var reporterConfig = config.specAsHtmlReporter || {};
 	var self = this;
+	var summaryOfTestRun = '';
 
 	self.suites = {};
 
@@ -105,7 +106,6 @@ var SpecAsHTMLReporter = function( baseReporterDecorator, formatError, config ) 
 
 	};
 
-
 	var makeItem = function( results, success ) {
 
 		var passed = success? "success": "failure";
@@ -152,6 +152,10 @@ var SpecAsHTMLReporter = function( baseReporterDecorator, formatError, config ) 
 		return baseSuite.render().join('\n') + '\n'
 	}
 
+	this.getSummaryOfTestRun = function () {
+		return summaryOfTestRun;
+	}
+
 	this.render = function () {
 
 		var markup = [
@@ -168,6 +172,7 @@ var SpecAsHTMLReporter = function( baseReporterDecorator, formatError, config ) 
 			'<body>',
 			'  <div class="karma-spec-as-html">',
 			self.getResultsMarkup(),
+			self.getSummaryOfTestRun(),
 			'  </div>',
 			'</body>',
 			'</html>'
@@ -184,6 +189,10 @@ var SpecAsHTMLReporter = function( baseReporterDecorator, formatError, config ) 
 		add( results );
 	};
 
+	this.onBrowserComplete = function (browser) {
+		summaryOfTestRun = '<p class="summaryOfTestRun">' + this.renderBrowser(browser) + '</p>\n'
+	}
+
     this.onRunComplete = function( ) {
 
 		var fullPath = path.resolve(
@@ -194,8 +203,10 @@ var SpecAsHTMLReporter = function( baseReporterDecorator, formatError, config ) 
 		fs.writeFile(
 			fullPath,
 			self.render(),
-			function( err) {
-				console.log(err)
+			function( err ) {
+				if (err) {
+					console.log(err);
+				}
 			}
 		);
 
