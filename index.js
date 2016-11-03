@@ -200,9 +200,8 @@ var SpecAsHTMLReporter = function( baseReporterDecorator, formatError, config ) 
 			reporterConfig.dir || config.basePath || ".",
 			reporterConfig.outputFile || "spec.html"
 		);
-console.log("**************************************************", fullPath, path.dirname( fullPath ))
+
 		mkdirp.sync( path.dirname( fullPath ) );
-console.log("**************************************************", fs.statSync(path.dirname( fullPath )))
 
 		fs.writeFile(
 			fullPath,
