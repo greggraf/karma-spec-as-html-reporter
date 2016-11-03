@@ -1,13 +1,13 @@
 {
   "name": "karma-spec-as-html-reporter",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Karma reporter that creates an html file displaying results similar to the output of the karma-spec-reporter",
   "main": "src/index.js",
   "scripts": {
     "test": "jasmine",
     "test:watch": "chokidar 'spec/*.js' 'index.js' -p -c 'npm run test'"
   },
-"repository": {
+  "repository": {
     "type": "git",
     "url": "git://github.com/greggraf/karma-spec-as-html-reporter"
   },
