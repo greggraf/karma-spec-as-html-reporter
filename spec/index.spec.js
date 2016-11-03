@@ -386,7 +386,10 @@ describe( "karma-spec-as-html-reporter", function() {
 				'  </style>',
 				'</head>',
 				'<body>',
+				'  <div class="karma-spec-as-html">',
 				'',
+				'',
+				'  </div>',
 				'</body>',
 				'</html>',
 				''
@@ -396,6 +399,29 @@ describe( "karma-spec-as-html-reporter", function() {
 			expect( result ).toBe( baseMarkup );
 
 		} );
+
+		it( "should have proper css ", function() {
+
+			var baseStyles= [
+				'.karma-spec-as-html {',
+				'  font-family: Helvetica, Arial, sans-serif;',
+				'  font-size: .9em;',
+				'  line-height: 1.5;',
+				'}',
+				'.karma-spec-as-html .suite ul {list-style-type: none; margin-top: .4em }',
+				'.karma-spec-as-html .suite li { margin-bottom: .8em; }',
+				'.karma-spec-as-html .suite { margin-top: 1em }',
+				'.karma-spec-as-html .success {color: green }',
+				'.karma-spec-as-html .success:before { content: "✓ " }',
+				'.karma-spec-as-html .failure {color: red }',
+				'.karma-spec-as-html .failure:before { content: "✗ " }'
+			].join( '\n' );
+
+			var result = reporter.getStyles()
+			expect( result ).toBe( baseStyles );
+
+		} );
+
 
 	} );
 
