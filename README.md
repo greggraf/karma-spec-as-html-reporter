@@ -31,6 +31,7 @@ Use the `specAsHtmlReporter` configuration in your `karma.conf.js` file
 
 ## Example
 
+<div style="border: 1px solid #eee; padding: .5em;">
 <style>
 .karma-spec-as-html {
   font-family: Helvetica, Arial, sans-serif;
@@ -65,12 +66,17 @@ Use the `specAsHtmlReporter` configuration in your `karma.conf.js` file
 </ul>
 </div>
 
-  </div>
+</div>
+</div>
 
 ## To Do
 
 - create the directory if it is not there
 - expose ways to inject CSS to change format of the results
+- see if it can be rewritten as an adapter like they do for real
+  - take advantage of util.format() ?
+  - express markup using the constants (ie: `this.SPEC_FAILURE = '%s %s FAILED' + '\n'` )
+- loop through all browsers instead of assuming there is just one
 
 
 
